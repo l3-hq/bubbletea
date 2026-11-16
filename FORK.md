@@ -14,7 +14,7 @@ This fork carries one library patch. CI, module-path, and toolchain commits on `
 |---|---|---|
 | [`bd63332`](https://github.com/laith-page/bubbletea/commit/bd63332403bae15732a02a1b7ee53913eb4b8ae8) Wait for renderer shutdown before restarting its ticker | `tea.go` joins the renderer goroutine after its ticker stops, before a restart resets it, and guards a renderer that never started. `renderer_lifecycle_test.go` covers the stop/restart race. | The old renderer's `Stop` could race the restarted ticker's `Reset` and leave rendering stopped. |
 
-That commit is the box/runs pin. Its library diff against upstream v2.1.1 is those two files (120 insertions, 3 deletions). No other library, example, or dependency patch is part of the fork delta.
+That commit is the box/runs pin. Its library diff against upstream v2.1.1 is those two files (120 insertions, 3 deletions). No other library patch is part of the fork delta. Example and tutorial `go.mod` / `go.sum` changes after v2.1.1 are module tidy and toolchain maintenance, not a runtime patch.
 
 ## Sync cadence
 
