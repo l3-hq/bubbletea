@@ -77,7 +77,7 @@ on:
 jobs:
   release:
     if: ${{ !contains(github.repository, '-internal') }}
-    runs-on: l3-ubuntu-26.04
+    runs-on: ${{ vars.CI_RUNNER }}
     permissions:
       contents: write
       id-token: write

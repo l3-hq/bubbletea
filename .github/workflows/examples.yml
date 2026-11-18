@@ -18,7 +18,7 @@ jobs:
   tidy:
     permissions:
       contents: write
-    runs-on: l3-ubuntu-26.04
+    runs-on: ${{ vars.CI_RUNNER }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-go@v6

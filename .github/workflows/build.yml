@@ -39,7 +39,7 @@ jobs:
     secrets: inherit
   workflow-check:
     name: Validate workflows
-    runs-on: l3-ubuntu-26.04
+    runs-on: ${{ vars.CI_RUNNER }}
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -51,7 +51,7 @@ jobs:
     name: Check
     if: ${{ always() }}
     needs: [workflow-check, build, build-go-mod, build-examples, build-tutorials, lint, coverage]
-    runs-on: l3-ubuntu-26.04
+    runs-on: ${{ vars.CI_RUNNER }}
     timeout-minutes: 2
     steps:
       - name: Require every check to pass
