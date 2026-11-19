@@ -6,13 +6,13 @@
 - Patch budget: 200 lines
 - Sync cadence: check upstream and rebase at least every 30 days; assess security fixes immediately
 
-This fork carries one library patch. CI, module-path, and toolchain commits on `main` after v2.1.1 are not library patches. The module path is `github.com/laith-page/bubbletea/v2`. To use a tagged fork without a `replace`, update imports and the dependency to that path. Packages compiled against `charm.land/bubbletea/v2` use distinct Go types and must be updated or adapted when combined with this fork.
+This fork carries one library patch. CI, module-path, and toolchain commits on `main` after v2.1.1 are not library patches. The module path is `github.com/l3-hq/bubbletea/v2`. To use a tagged fork without a `replace`, update imports and the dependency to that path. Packages compiled against `charm.land/bubbletea/v2` use distinct Go types and must be updated or adapted when combined with this fork.
 
 ## Patches
 
 | Commit | Change | Reason |
 |---|---|---|
-| [`bd63332`](https://github.com/laith-page/bubbletea/commit/bd63332403bae15732a02a1b7ee53913eb4b8ae8) Wait for renderer shutdown before restarting its ticker | `tea.go` joins the renderer goroutine after its ticker stops, before a restart resets it, and guards a renderer that never started. `renderer_lifecycle_test.go` covers the stop/restart race. | The old renderer's `Stop` could race the restarted ticker's `Reset` and leave rendering stopped. |
+| [`bd63332`](https://github.com/l3-hq/bubbletea/commit/bd63332403bae15732a02a1b7ee53913eb4b8ae8) Wait for renderer shutdown before restarting its ticker | `tea.go` joins the renderer goroutine after its ticker stops, before a restart resets it, and guards a renderer that never started. `renderer_lifecycle_test.go` covers the stop/restart race. | The old renderer's `Stop` could race the restarted ticker's `Reset` and leave rendering stopped. |
 
 That commit is the box/runs pin. Its library diff against upstream v2.1.1 is those two files (120 insertions, 3 deletions). No other library patch is part of the fork delta. Example and tutorial `go.mod` / `go.sum` changes after v2.1.1 are module tidy and toolchain maintenance, not a runtime patch.
 
